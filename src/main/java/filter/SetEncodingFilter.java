@@ -22,9 +22,9 @@ public class SetEncodingFilter extends HttpFilter implements Filter {
 		// サーブレットクラス実行後に行なわせたい処理を記述
 	}
 
-	
+	@Override
 	public void init(FilterConfig fConfig) throws ServletException {}
-	
+	@Override
 	public void destroy() {}
 
 
