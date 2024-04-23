@@ -45,7 +45,6 @@ public class Login extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		
-		// ログイン結果画面にフォワード
 		
 		
 	}
