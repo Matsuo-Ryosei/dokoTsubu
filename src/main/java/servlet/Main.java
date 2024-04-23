@@ -31,15 +31,10 @@ public class Main extends HttpServlet {
 			application.setAttribute("mutterList", mutterList);
 		}
 		
-		// テスト中
 		
 		//ログイン中か確認でセッションスコープからユーザー情報を取得
 		HttpSession session = request.getSession();
-		User loginUser = (User)session.getAttribute("loginUser");
-		
-		int test = (int)session.getAttribute("test");
-		System.out.println(test);
-		
+		User loginUser = (User)session.getAttribute("loginUser");	
 		
 		if (loginUser == null) {
 			// リダイレクト
@@ -54,7 +49,7 @@ public class Main extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// リクエストパラメータの取得
-		request.setCharacterEncoding("UTF-8");
+//		request.setCharacterEncoding("UTF-8");
 		String text = request.getParameter("text");
 		
 		// 入力値チェック
