@@ -31,19 +31,26 @@ public class Main extends HttpServlet {
 			application.setAttribute("mutterList", mutterList);
 		}
 		
-		
+		/*
+		 * 	↓フィルターで処理するため、この記述は不要になった
+		 */
 		//ログイン中か確認でセッションスコープからユーザー情報を取得
-		HttpSession session = request.getSession();
-		User loginUser = (User)session.getAttribute("loginUser");	
+//		HttpSession session = request.getSession();
+//		User loginUser = (User)session.getAttribute("loginUser");	
+//		
+//		if (loginUser == null) {
+//			// リダイレクト
+//			response.sendRedirect("index.jsp");
+//		} else {
+//			// フォワード
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/main.jsp");
+//			dispatcher.forward(request, response);
+//		}
+//		
+		// メイン画面にフォワード
+				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/main.jsp");
+				dispatcher.forward(request, response);
 		
-		if (loginUser == null) {
-			// リダイレクト
-			response.sendRedirect("index.jsp");
-		} else {
-			// フォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/main.jsp");
-			dispatcher.forward(request, response);
-		}
 	}
 
 	
