@@ -7,7 +7,10 @@
 <title>どこつぶ</title>
 </head>
 <body>
-	<p>ログインに失敗しました</p>
+	<script>
+	 	alert('ユーザー名かパスワードが間違っています');
+	</script>
+	<p>ログインできませんでした</p>
 	<a href="index.jsp">TOPへ</a>
 </body>
 </html>

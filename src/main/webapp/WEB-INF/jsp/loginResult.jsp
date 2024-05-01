@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="model.User" %>
-<%
-	// セッションスコープからユーザー情報を取得
-	User loginUser = (User)session.getAttribute("loginUser");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +9,10 @@
 </head>
 <body>
 	<h1>どこつぶログイン</h1>
-		<p>ログインに成功しました</p>
-		<p>ようこそ<%= loginUser.getName() %>さん</p>
+		<script>
+	 	alert('ログインに成功しました');
+	 	</script>
+		<p>ようこそ<c:out value="${loginUser.name}" />さん</p>
 		<a href="Main">つぶやき投稿・閲覧へ</a>
 </body>
 </html>

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.LoginLogic;
+import model.LoginUserCheckLogic;
+import model.LoginUserErrorMessage;
 import model.User;
 
 
@@ -28,25 +30,37 @@ public class Login extends HttpServlet {
 		// Userインスタンスの生成
 		User user = new User(name, pass);
 		
+		// エラーチェック
+		LoginUserCheckLogic errorCheck = new LoginUserCheckLogic(user);
+		LoginUserErrorMessage errorMsg = errorCheck.execute();
+		if (errorMsg != null) {
+			request.setAttribute("errorMsg", errorMsg);
+			request.setAttribute("user", user);
+			forward("index.jsp", request, response);
+		}
 		// ログイン処理
 		LoginLogic loginLogic = new LoginLogic();
 		boolean isLogin = loginLogic.execute(user);
-		System.out.println(isLogin);
+		System.out.println("ログインテスト:" + isLogin);
 		
 		// ログイン成功時の処理
 		if (isLogin) {
 			// ユーザー情報をセッションスコープに保存
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", user);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/loginResult.jsp");
-			dispatcher.forward(request, response);
+			// フォワード
+			forward("WEB-INF/jsp/loginResult.jsp", request, response);
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/loginFault.jsp");
-			dispatcher.forward(request, response);
+			// フォワード
+			forward("WEB-INF/jsp/loginFault.jsp", request, response);
 		}
-		
-		
 		
 	}
 
+	public void forward(String page, HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+		dispatcher.forward(request, response);
+	}
+	
 }
